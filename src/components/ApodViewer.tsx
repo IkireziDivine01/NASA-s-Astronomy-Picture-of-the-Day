@@ -26,7 +26,11 @@ const ApodViewer: React.FC = () => {
       );
       setApodData(response.data);
     } catch (err) {
-      setError(`Failed to fetch APOD data: ${err.message}`);
+      if (err instanceof Error) {
+        setError(`Failed to fetch APOD data: ${err.message}`);
+      } else {
+        setError('An unknown error occurred.');
+      }
     } finally {
       setLoading(false);
     }
